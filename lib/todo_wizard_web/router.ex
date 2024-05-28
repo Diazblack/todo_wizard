@@ -14,20 +14,23 @@ defmodule TodoWizardWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", TodoWizardWeb do
-    pipe_through :browser
-
-    get "/", PageController, :home
-  end
-
   # Other scopes may use custom stacks.
-  # scope "/api", TodoWizardWeb do
-  #   pipe_through :api
-  # end
+  scope "/api/v1", TodoWizardWeb do
+    pipe_through :api
+
+    post "/users/", UserController, :create
+    get "/users/:username", UserController, :show
+    put "/users/:username", UserController, :update
+    delete "/users/:username", UserController, :delete
+
+    resources "/todo_lists", TodoListController, except: [:new, :edit]
+
+    resources "/todo_items", TodoItemController, except: [:new, :edit, :index]
+    put "/todo_items/done/:id", TodoItemController, :complete
+  end
 
   # Enable Swoosh mailbox preview in development
   if Application.compile_env(:todo_wizard, :dev_routes) do
-
     scope "/dev" do
       pipe_through :browser
 
