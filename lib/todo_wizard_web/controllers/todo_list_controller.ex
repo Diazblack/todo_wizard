@@ -34,6 +34,4 @@ defmodule TodoWizardWeb.TodoListController do
       send_resp(conn, :no_content, "")
     end
   end
-
-  # def complete()
 end
