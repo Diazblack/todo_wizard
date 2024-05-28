@@ -11,15 +11,10 @@ defmodule TodoWizard.DataTest do
 
     @invalid_attrs %{description: nil, title: nil}
 
-    test "list_todo_lists/0 returns all todo_lists" do
+    test "get_todo_list/1 returns the todo_list with given id" do
       todo_list = todo_list_fixture()
-
-      assert Data.list_todo_lists() == [todo_list]
-    end
-
-    test "get_todo_list!/1 returns the todo_list with given id" do
-      todo_list = todo_list_fixture()
-      assert Data.get_todo_list!(todo_list.id) == todo_list
+      {:ok, list} = Data.get_todo_list(todo_list.id)
+      assert list.id == todo_list.id
     end
 
     test "create_todo_list/1 with valid data creates a todo_list" do
@@ -48,13 +43,16 @@ defmodule TodoWizard.DataTest do
     test "update_todo_list/2 with invalid data returns error changeset" do
       todo_list = todo_list_fixture()
       assert {:error, %Ecto.Changeset{}} = Data.update_todo_list(todo_list, @invalid_attrs)
-      assert todo_list == Data.get_todo_list!(todo_list.id)
+      {:ok, list} = Data.get_todo_list(todo_list.id)
+      assert todo_list.description == list.description
+      assert todo_list.title == list.title
+      assert todo_list.user_id == list.user_id
     end
 
     test "delete_todo_list/1 deletes the todo_list" do
       todo_list = todo_list_fixture()
       assert {:ok, %TodoList{}} = Data.delete_todo_list(todo_list)
-      assert_raise Ecto.NoResultsError, fn -> Data.get_todo_list!(todo_list.id) end
+      assert {:error, :not_found} = Data.get_todo_list(todo_list.id)
     end
 
     test "change_todo_list/1 returns a todo_list changeset" do

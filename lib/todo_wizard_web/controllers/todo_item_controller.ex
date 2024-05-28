@@ -40,4 +40,12 @@ defmodule TodoWizardWeb.TodoItemController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  def complete(conn, %{"id" => id}) do
+    todo_item = Data.get_todo_item!(id)
+
+    with {:ok, %TodoItem{} = todo_item} <- Data.complete_todo_item(todo_item) do
+      render(conn, :show, todo_item: todo_item)
+    end
+  end
 end

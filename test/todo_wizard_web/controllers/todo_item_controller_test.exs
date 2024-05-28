@@ -22,14 +22,7 @@ defmodule TodoWizardWeb.TodoItemControllerTest do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
 
-  describe "index" do
-    test "lists all todo_items", %{conn: conn} do
-      conn = get(conn, ~p"/api/v1/todo_items")
-      assert json_response(conn, 200)["data"] == []
-    end
-  end
-
-  describe "create todo_item" do
+  describe "create todo_item ->" do
     test "renders todo_item when data is valid", %{conn: conn} do
       list = todo_list_fixture()
 
@@ -54,7 +47,7 @@ defmodule TodoWizardWeb.TodoItemControllerTest do
     end
   end
 
-  describe "update todo_item" do
+  describe "update todo_item ->" do
     setup [:create_todo_item]
 
     test "renders todo_item when data is valid", %{
@@ -80,7 +73,7 @@ defmodule TodoWizardWeb.TodoItemControllerTest do
     end
   end
 
-  describe "delete todo_item" do
+  describe "delete todo_item ->" do
     setup [:create_todo_item]
 
     test "deletes chosen todo_item", %{conn: conn, todo_item: todo_item} do
@@ -90,6 +83,19 @@ defmodule TodoWizardWeb.TodoItemControllerTest do
       assert_error_sent 404, fn ->
         get(conn, ~p"/api/v1/todo_items/#{todo_item}")
       end
+    end
+  end
+
+  describe "checked todo_item ->" do
+    test "set the is_checked field on the todo_item", %{conn: conn} do
+      todo_item = todo_item_fixture(%{is_checked: false})
+
+      %{"data" => resp} =
+        conn
+        |> put(~p"/api/v1/todo_items/done/#{todo_item}", %{})
+        |> json_response(200)
+
+      assert resp["is_checked"]
     end
   end
 

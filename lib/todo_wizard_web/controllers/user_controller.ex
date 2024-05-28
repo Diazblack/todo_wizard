@@ -15,8 +15,9 @@ defmodule TodoWizardWeb.UserController do
   end
 
   def show(conn, %{"username" => username}) do
-    {:ok, user} = Accounts.get_by_username(username)
-    render(conn, :show, user: user)
+    with {:ok, user} <- Accounts.get_by_username(username) do
+      render(conn, :show, user: user)
+    end
   end
 
   def update(conn, %{"username" => username, "user" => user_params}) do

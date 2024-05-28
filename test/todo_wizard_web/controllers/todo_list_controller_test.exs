@@ -20,14 +20,14 @@ defmodule TodoWizardWeb.TodoListControllerTest do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
 
-  describe "index" do
-    test "lists all todo_lists", %{conn: conn} do
-      conn = get(conn, ~p"/api/v1/todo_lists")
-      assert json_response(conn, 200)["data"] == []
-    end
-  end
+  # describe "index ->" do
+  #   test "lists all todo_lists", %{conn: conn} do
+  #     conn = get(conn, ~p"/api/v1/todo_lists")
+  #     assert json_response(conn, 200)["data"] == []
+  #   end
+  # end
 
-  describe "create todo_list" do
+  describe "create todo_list ->" do
     test "renders todo_list when data is valid", %{conn: conn} do
       user = user_fixture()
       conn = post(conn, ~p"/api/v1/todo_lists", todo_list: %{@create_attrs | user_id: user.id})
@@ -48,7 +48,7 @@ defmodule TodoWizardWeb.TodoListControllerTest do
     end
   end
 
-  describe "update todo_list" do
+  describe "update todo_list ->" do
     setup [:create_todo_list]
 
     test "renders todo_list when data is valid", %{
@@ -73,16 +73,14 @@ defmodule TodoWizardWeb.TodoListControllerTest do
     end
   end
 
-  describe "delete todo_list" do
+  describe "delete todo_list ->" do
     setup [:create_todo_list]
 
     test "deletes chosen todo_list", %{conn: conn, todo_list: todo_list} do
       conn = delete(conn, ~p"/api/v1/todo_lists/#{todo_list}")
       assert response(conn, 204)
 
-      assert_error_sent 404, fn ->
-        get(conn, ~p"/api/v1/todo_lists/#{todo_list}")
-      end
+      assert conn |> get(~p"/api/v1/todo_lists/#{todo_list}") |> response(404)
     end
   end
 

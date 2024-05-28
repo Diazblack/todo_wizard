@@ -2,12 +2,14 @@ defmodule TodoWizard.Data.TodoList do
   use TodoWizard.BaseSchema
 
   alias TodoWizard.Accounts.User
+  alias TodoWizard.Data.TodoItem
 
   schema "todo_lists" do
     field :description, :string
     field :title, :string
 
     belongs_to :user, User
+    has_many :todo_items, TodoItem
     timestamps()
   end
 

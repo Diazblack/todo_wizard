@@ -19,10 +19,14 @@ defmodule TodoWizardWeb.Router do
     pipe_through :api
 
     post "/users/", UserController, :create
+    get "/users/:username", UserController, :show
     put "/users/:username", UserController, :update
     delete "/users/:username", UserController, :delete
+
     resources "/todo_lists", TodoListController, except: [:new, :edit]
-    resources "/todo_items", TodoItemController, except: [:new, :edit]
+
+    resources "/todo_items", TodoItemController, except: [:new, :edit, :index]
+    put "/todo_items/done/:id", TodoItemController, :complete
   end
 
   # Enable Swoosh mailbox preview in development

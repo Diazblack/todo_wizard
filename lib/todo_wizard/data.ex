@@ -9,33 +9,30 @@ defmodule TodoWizard.Data do
   alias TodoWizard.Data.TodoList
 
   @doc """
-  Returns the list of todo_lists.
-
-  ## Examples
-
-      iex> list_todo_lists()
-      [%TodoList{}, ...]
-
-  """
-  def list_todo_lists do
-    Repo.all(TodoList)
-  end
-
-  @doc """
   Gets a single todo_list.
 
   Raises `Ecto.NoResultsError` if the Todo list does not exist.
 
   ## Examples
 
-      iex> get_todo_list!(123)
+      iex> get_todo_list(123)
       %TodoList{}
 
-      iex> get_todo_list!(456)
+      iex> get_todo_list(456)
       ** (Ecto.NoResultsError)
 
   """
-  def get_todo_list!(id), do: Repo.get!(TodoList, id)
+  def get_todo_list(id) do
+    from(tl in TodoList,
+      where: tl.id == ^id,
+      preload: [:todo_items]
+    )
+    |> Repo.one()
+    |> case do
+      nil -> {:error, :not_found}
+      %TodoList{} = list -> {:ok, list}
+    end
+  end
 
   @doc """
   Creates a todo_list.
@@ -166,6 +163,24 @@ defmodule TodoWizard.Data do
   def update_todo_item(%TodoItem{} = todo_item, attrs) do
     todo_item
     |> TodoItem.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Set is_checked field to true on a todo_item.
+
+  ## Examples
+
+      iex> complete_todo_item(todo_item, %{field: new_value})
+      {:ok, %TodoItem{}}
+
+      iex> complete_todo_item(todo_item, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def complete_todo_item(%TodoItem{} = todo_item) do
+    todo_item
+    |> TodoItem.changeset(%{is_checked: true})
     |> Repo.update()
   end
 
