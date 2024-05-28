@@ -12,23 +12,23 @@ Welcome to **TodoWizard**, the magical Todo list application that turns your tas
 Join the adventure and wave your wand over your to-do list with TodoWizard! 🧙‍♂️✨
 
 # Installation 
-Follow the instructions to install Elixir 1.16-opt-26 [here](https://elixir-lang.org/install.html) 
-If you have a different version of elixir installed, I recommend to use asdf for version management. 
-for more information visit [asdf](https://asdf-vm.com/guide/getting-started.html)
+Follow the instructions to install Elixir 1.16-opt-26 [Elixir Lang Org Page](https://elixir-lang.org/install.html) 
+If you have a different version of Elixir installed, I recommend using asdf for version management. 
+For more information visit [asdf homepage](https://asdf-vm.com/guide/getting-started.html)
 
 # Run the app
 To start your Phoenix server:
 
   * Run `mix setup` to install and setup dependencies
   * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
-  * To connect with the API, is necessary to make HTTT request to you local endpoint http://localhost:4000/api/v1/ 
+  * To connect with the API, is necessary to make HTTP request to your local endpoint http://localhost:4000/api/v1/ 
 # Endpoints 
 
 ## Users 
-Endpoint to registrate user information
+Endpoint to register user information
 
 ### Create
-Send a http request to POST `http://localhost:4000/api/v1/users` with the following JSON data
+Send an HTTP request to POST `http://localhost:4000/api/v1/users` with the following JSON data
 
 ```json
 {
@@ -53,8 +53,8 @@ Returns a 201 response with:
  ```
 
 ### Update 
-Send a http request to PUT `http://localhost:4000/api/v1/users/:username` to update any field from the users table.
-**Note:** the username should be added to the URL in to make the endpoint work 
+Send an HTTP request to PUT `http://localhost:4000/api/v1/users/:username` to update any field from the users table.
+**Note:** The username should be added to the URL, to make the endpoint work 
 ```json
 {
 	"user": {
@@ -67,9 +67,9 @@ Send a http request to PUT `http://localhost:4000/api/v1/users/:username` to upd
 Returns a 200 response
 
 ### Show 
-Send a http request to GET `http://localhost:4000/api/v1/users/:username` to get user information 
+Send an HTTP request to GET `http://localhost:4000/api/v1/users/:username` to get user information 
 
-**Note:** the username should be added to the URL in to make the endpoint work 
+**Note:** The username should be added to the URL, to make the endpoint work 
 
 Returns a 200 response with the following data 
 
@@ -86,15 +86,15 @@ Returns a 200 response with the following data
 
 ### DELETE 
 
-**Note:** the username should be added to the URL in to make the endpoint work 
-Send a http request to DELETE `http://localhost:4000/api/v1/users/:username` to delete the user entry 
 
+Send an HTTP request to DELETE `http://localhost:4000/api/v1/users/:username` to delete the user entry 
+**Note:** The username should be added to the URL, to make the endpoint work 
 Returns a 204 when the entry is deleted, 404 in any other case 
 
 ## Todo Lists 
 Endpoint to handle Todo List information 
 ### Create
-Send a http request to POST `http://localhost:4000/api/v1/todo_lists` with the following JSON data
+Send an HTTP request to POST `http://localhost:4000/api/v1/todo_lists` with the following JSON data
 
 ```json
 {
@@ -119,9 +119,9 @@ Returns a 201 response with:
  ```
 
 ### Update 
-Send a http request to PUT `http://localhost:4000/api/v1/todo_lists/:id` to update fields from todo list table.
+Send an HTTP request to PUT `http://localhost:4000/api/v1/todo_lists/:id` to update fields from todo list table.
 
-**Note:** the id should be added to the URL in to make the endpoint work 
+**Note:** The username should be added to the URL, to make the endpoint work 
 ```json
 {
 	"todo_list": {
@@ -135,10 +135,10 @@ Send a http request to PUT `http://localhost:4000/api/v1/todo_lists/:id` to upda
 Returns a 200 
 
 ### Show 
-Send a http request to GET `http://localhost:4000/api/v1/todo_lists/:id` to get todo list and todo items information 
+Send an HTTP request to GET `http://localhost:4000/api/v1/todo_lists/:id` to get todo list and todo items information 
 
-**Note 1:** the id should be added to the URL in to make the endpoint work 
-**Note 2:** this endpoind should be use to get all the Todo Items from the list 
+**Note 1:** The username should be added to the URL, to make the endpoint work 
+**Note 2:** This endpoint should be used to get all the Todo Items for a Todo List
 
 Returns a 200 response with the following data 
 
@@ -163,16 +163,16 @@ Returns a 200 response with the following data
 ```
 
 ### DELETE
-**Note:** the id should be added to the URL in to make the endpoint work 
-Send a http request to DELETE `http://localhost:4000/api/v1/todo_lists/:id` to delete the user entry  
 
+Send an HTTP request to DELETE `http://localhost:4000/api/v1/todo_lists/:id` to delete the user entry  
+**Note:** The username should be added to the URL, to make the endpoint work 
 Return a 204 when the entry is deleted, 404 in any other case 
 
 ## Todo Items 
 Endpoint to handle Todo Items information 
 
 ### Create
-Send a http request to POST `http://localhost:4000/api/v1/todo_items` with the following JSON data
+Send an HTTP request to POST `http://localhost:4000/api/v1/todo_items` with the following JSON data
 
 ```json
 {
@@ -200,8 +200,8 @@ Returns a 201 response with:
 
 ### Update 
 
-Send a http request to PUT `http://localhost:4000/api/v1/todo_items/:id` to update fields from todo list table.
-**Note:** the id should be added to the URL in to make the endpoint work 
+Send an HTTP request to PUT `http://localhost:4000/api/v1/todo_items/:id` to update fields from todo list table.
+**Note:** The username should be added to the URL, to make the endpoint work 
 
 ```json
 {
@@ -218,8 +218,8 @@ Send a http request to PUT `http://localhost:4000/api/v1/todo_items/:id` to upda
 Returns a 200 
 
 ### Show 
-Send a http request to GET `http://localhost:4000/api/v1/todo_items/:id` to get todo list and todo items information 
-**Note:** the id should be added to the URL in to make the endpoint work 
+Send an HTTP request to GET `http://localhost:4000/api/v1/todo_items/:id` to get todo list and todo items information 
+**Note:** The username should be added to the URL, to make the endpoint work 
 
 Returns a 200 response with the following data 
 
@@ -236,14 +236,14 @@ Returns a 200 response with the following data
 ```
 
 ### Delete
-Send a http request to DELETE `http://localhost:4000/api/v1/todo_items/:id` to delete the user entry  
-**Note:** the id should be added to the URL in to make the endpoint work 
+Send an HTTP request to DELETE `http://localhost:4000/api/v1/todo_items/:id` to delete the user entry  
+**Note:** The username should be added to the URL, to make the endpoint work 
 
 Returns a 204 when the entry is deleted, 404 in any other case 
 
 ### Done 
-Send a http request to PUT `http://localhost:4000/api/v1/todo_items/done/:id` to set the Todo Item as complete.
-**Note:** the id should be added to the URL in to make the endpoint work
+Send an HTTP request to PUT `http://localhost:4000/api/v1/todo_items/done/:id` to set the Todo Item as complete.
+**Note:** The username should be added to the URL, to make the endpoint work 
 
 entry before hitting the endpoint 
 
@@ -272,6 +272,7 @@ Returns a 200 response with the following data
 	}
 }
 ```
+
 ## Learn more
 
   * Official website: https://www.phoenixframework.org/
