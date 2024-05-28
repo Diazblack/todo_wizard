@@ -1,4 +1,4 @@
-defmodule TodoWizard.Acounts do
+defmodule TodoWizard.Accounts do
   alias TodoWizard.Accounts.User
   alias TodoWizard.Repo
 
@@ -34,7 +34,14 @@ defmodule TodoWizard.Acounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_by_username(username), do: Repo.get_by(User, username: username)
+  def get_by_username(username) do
+    User
+    |> Repo.get_by(username: username)
+    |> case do
+      %User{} = user -> {:ok, user}
+      _any -> {:error, :not_found}
+    end
+  end
 
   @doc """
   Gets a single user.
@@ -66,7 +73,7 @@ defmodule TodoWizard.Acounts do
   def update_user(%User{} = user, attrs) do
     user
     |> User.changeset(attrs)
-    |> Repo.insert()
+    |> Repo.update()
   end
 
   @doc """
