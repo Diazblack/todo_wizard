@@ -16,10 +16,7 @@ defmodule TodoWizardWeb.TodoListJSON do
   end
 
   defp data(%TodoList{} = todo_list) do
-    %{
-      id: todo_list.id,
-      title: todo_list.title,
-      description: todo_list.description
-    }
+    todo_list
+    |> Map.take(~w[id title description user_id]a)
   end
 end

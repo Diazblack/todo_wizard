@@ -8,7 +8,7 @@ defmodule TodoWizard.Repo.Migrations.CreateTodoLists do
       add :description, :text
       add :user_id, references(:users, on_delete: :delete_all, type: :binary_id)
 
-      timestamps(type: :utc_datetime)
+      timestamps(type: :utc_datetime_usec)
     end
 
     create index(:todo_lists, [:user_id])

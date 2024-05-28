@@ -8,7 +8,7 @@ defmodule TodoWizard.Data.TodoList do
     field :title, :string
 
     belongs_to :user, User
-    timestamps(type: :utc_datetime)
+    timestamps()
   end
 
   @doc false
@@ -16,5 +16,6 @@ defmodule TodoWizard.Data.TodoList do
     todo_list
     |> cast(attrs, [:title, :description, :user_id])
     |> validate_required([:title, :user_id])
+    |> foreign_key_constraint(:user_id)
   end
 end

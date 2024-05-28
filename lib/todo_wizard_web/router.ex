@@ -22,6 +22,7 @@ defmodule TodoWizardWeb.Router do
     put "/users/:username", UserController, :update
     delete "/users/:username", UserController, :delete
     resources "/todo_lists", TodoListController, except: [:new, :edit]
+    resources "/todo_items", TodoItemController, except: [:new, :edit]
   end
 
   # Enable Swoosh mailbox preview in development

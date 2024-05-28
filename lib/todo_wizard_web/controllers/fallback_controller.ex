@@ -16,7 +16,7 @@ defmodule TodoWizardWeb.FallbackController do
   def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
     conn
     |> put_status(:unprocessable_entity)
-    |> put_view(html: TodoWizardWeb.ErrorHTML, json: TodoWizardWeb.ErrorJSON)
+    |> put_view(html: TodoWizardWeb.ErrorHTML, json: TodoWizardWeb.ChangesetJSON)
     |> render(:error, changeset: changeset)
   end
 
