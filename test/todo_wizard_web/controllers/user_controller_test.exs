@@ -44,7 +44,7 @@ defmodule TodoWizardWeb.UserControllerTest do
 
     test "renders user when data is valid", %{
       conn: conn,
-      user: %User{username: username, id: id} = user
+      user: %User{username: username, id: id}
     } do
       conn = put(conn, ~p"/api/v1/users/#{username}", user: @update_attrs)
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
